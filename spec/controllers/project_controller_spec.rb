@@ -62,6 +62,48 @@ RSpec.describe ProjectsController, type: :controller do
     end
   end
 
+  describe '#new' do
+    context "ユーザー認証済" do
+      before do
+        @user = FactoryBot.create(:user)
+      end
+
+      it "新しいプロジェクト作成画面へのアクセス" do
+        sign_in @user
+        get :new
+        expect(response).to be_successful
+      end
+    end
+
+    context "ユーザー未認証" do
+      it "新しいプロジェクト作成画面へのアクセス" do
+        get :new
+        expect(response).to_not be_successful
+      end
+    end
+  end
+
+  describe '#edit' do
+    before do
+      @user = FactoryBot.create(:user)
+      @project = FactoryBot.create(:project, owner: @user)
+    end
+    context "ユーザー認証済" do
+      it "プロジェクト編集画面へのアクセス" do
+        sign_in @user
+        get :edit, params: { id: @project.id }
+        expect(response).to be_successful
+      end
+    end
+
+    context "ユーザー未認証" do
+      it "プロジェクト編集画面へのアクセス" do
+        get :edit, params: { id: @project.id }
+        expect(response).to_not be_successful
+      end
+    end
+  end
+
   describe "#create" do
     context "as an authenticated user" do
       before do
