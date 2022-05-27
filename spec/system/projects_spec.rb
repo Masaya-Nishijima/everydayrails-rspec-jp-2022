@@ -58,4 +58,20 @@ RSpec.describe "Projects", type: :system do
     expect(page).to_not have_content project.name
     #一覧画面でリンクに打ち消し線を付ける。
   end
+
+
+  scenario "完了済みもShowAllボタンを押されたらコンプリート済みも表示する" do
+    user = FactoryBot.create(:user)
+    project = FactoryBot.create(:project, owner: user)
+    sign_in user
+
+    visit project_path(project)
+
+    click_button "Complete"
+
+    visit root_path
+
+    click_link "ShowAll"
+    expect(page).to have_content project.name
+  end
 end

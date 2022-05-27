@@ -5,11 +5,14 @@
     <span class="bi bi-plus-lg" aria-hidden="true"></span>
     New Project
   <% end %>
+
+  <%= link_to "ShowAll", root_path(all: true)%>
+  <%= params[:all] %>
 </h1>
 
 
 <% @projects.each do |project| %>
-  <% next if project.completed %>
+  <% next if project.completed && params[:all] != "true" %>
   <h2><%= link_to project.name, project %></h2>
   <p>
     <%= project.description %>
