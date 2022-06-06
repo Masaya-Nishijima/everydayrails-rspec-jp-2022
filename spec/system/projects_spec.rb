@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe "Projects", type: :system do
+  let(:user){FactoryBot.create(:user)}
   scenario "user creates a new project" do
-    user = FactoryBot.create(:user)
     # using our custom login helper:
     # sign_in_as user
     # or the one provided by Devise:
@@ -24,7 +24,6 @@ RSpec.describe "Projects", type: :system do
   end
 
   scenario "ユーザーがプロジェクトを編集する" do
-    user = FactoryBot.create(:user)
     project = FactoryBot.create(:project ,owner: user)
     # using our custom login helper:
     # sign_in_as user
