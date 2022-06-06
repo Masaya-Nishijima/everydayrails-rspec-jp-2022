@@ -96,6 +96,14 @@ RSpec.describe ProjectsController, type: :controller do
       end
     end
 
+    context "ユーザー認証済の他ユーザーによる" do
+      it "プロジェクト編集画面へのアクセス" do
+        sign_in FactoryBot.create(:user)
+        get :edit, params: { id: @project.id }
+        expect(response).to_not be_successful
+      end
+    end
+
     context "ユーザー未認証" do
       it "プロジェクト編集画面へのアクセス" do
         get :edit, params: { id: @project.id }
