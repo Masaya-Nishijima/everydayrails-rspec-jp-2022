@@ -30,8 +30,7 @@ RSpec.describe "Projects", type: :system do
     # or the one provided by Devise:
     sign_in user
 
-    visit root_path # refactor: 直接`project`へアクセスしたいが project_pathではアクセスできなかった。
-    click_link project.name # refactor: 同上
+    visit project_path(project)
 
     expect {
       click_link "Edit"
