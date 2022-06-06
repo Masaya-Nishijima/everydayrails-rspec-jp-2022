@@ -6,8 +6,7 @@
     New Project
   <% end %>
 
-  <%= link_to "ShowAll", root_path(all: true)%>
-  <%= params[:all] %>
+  <em><%= params[:all] ? 'Now, Show All' : (link_to "ShowAll", root_path(all: true)) %></em>
 </h1>
 
 
