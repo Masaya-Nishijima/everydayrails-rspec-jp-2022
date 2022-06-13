@@ -5,6 +5,8 @@
     <span class="bi bi-plus-lg" aria-hidden="true"></span>
     New Project
   <% end %>
+
+  <em><%= params[:all] ? 'Now, Show All' : (link_to "ShowAll", root_path(all: true)) %></em>
 </h1>
 
 
