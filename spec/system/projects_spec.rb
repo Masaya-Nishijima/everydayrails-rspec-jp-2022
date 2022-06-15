@@ -17,14 +17,14 @@ RSpec.describe "Projects", type: :system do
 
       aggregate_failures do
         expect(page).to have_content "Project was successfully created"
-        expect(page).to have_content "Test Project"
+        expect(page).to have_content "Typed title"
         expect(page).to have_content "Owner: #{user.name}"
       end
     }.to change(user.projects, :count).by(1)
   end
 
   scenario "ユーザーがプロジェクトを編集する" do
-    project = FactoryBot.create(:project ,owner: user)
+    project = FactoryBot.create(:project ,owner: user, name: "Before Title")
     # using our custom login helper:
     # sign_in_as user
     # or the one provided by Devise:
@@ -39,7 +39,7 @@ RSpec.describe "Projects", type: :system do
 
       aggregate_failures do
         expect(page).to have_content "Project was successfully updated"
-        expect(page).to have_content "Test Project"
+        expect(page).to have_content "Typed title"
         expect(page).to have_content "Owner: #{user.name}"
       end
     }.to change(user.projects, :count).by(0)
