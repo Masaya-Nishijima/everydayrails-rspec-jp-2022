@@ -1,9 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe "Home page", type: :request do
-  it "responds successfully" do
-    get root_path
-    expect(response).to be_successful
-    expect(response).to have_http_status "200"
+  context "ルートのレスポンス確認" do
+    before { get root_path }
+    it { expect(response).to have_http_status(:success) }
+  end
+
+  context "ログインを要求するリダイレクト" do
+    before { get projects_path	}
+    it { expect(response).to redirect_to(user_session_path) }
+    # http://localhost:3000/projects アクセスするログインを要求するページ
+    # http://localhost:3000/users/sign_in リダイレクト先
   end
 end
