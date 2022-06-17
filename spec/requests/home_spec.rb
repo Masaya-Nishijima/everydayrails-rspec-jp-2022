@@ -9,7 +9,7 @@ RSpec.describe "Home page", type: :request do
   context "ログインを要求するリダイレクト" do
     before {get projects_path	}
     it { expect(response).to redirect_to(user_session_path) }
-    # http://localhost:3000/projects
-    # http://localhost:3000/users/sign_in
+    # http://localhost:3000/projects アクセスするログインを要求するページ
+    # http://localhost:3000/users/sign_in リダイレクト先
   end
 end
